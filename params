@@ -1,0 +1,6 @@
+export DB_HOST=xx.xx.ufl.edu
+export DB_PORT=5432
+export DB_NAME=twitter_geo_split_14
+export DB_USER=xx
+export DB_PASS=xx
+export DATA_DIR=data

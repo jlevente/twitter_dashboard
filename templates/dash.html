@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Twitter data collection dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      .container {
+        max-width: 500px;
+        padding-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <h2>Twitter data collector statistics</h2>
+      <table>
+	<tr>
+	  <td><b>Report generated at</b></td>
+	  <td>{{ generated_time }}</td>
+	</tr>
+	<tr>
+	  <td><b>Active database host</b></td>
+	  <td>{{ host }}</td>
+	</tr>
+	<tr>
+	  <td><b>Active database name</b></td>
+	  <td>{{ db_name }}</td>
+	</tr>
+	<tr>
+	  <td><b>Total # of tweets in database</b></td>
+	  <td>{{ total_num }}</td>
+	</tr>
+      </table>
+      <br/>
+      <p>Detailed stats:</p>
+      <ul>
+        {% for table in reports %}
+        <li> <b>{{ table['name'] }}</b></li>
+		<ul>
+			<li> Total: {{ table['total']['value'] }}</li>
+			<li> Rate last hour: {{ table['curr_rate']['value'] }}</li>
+		</ul>	
+        {% endfor %}
+      </ul>
+    </div>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
