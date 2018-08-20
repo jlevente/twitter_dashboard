@@ -13,6 +13,7 @@ def get_params():
     }
     return params
 
+
 class ReportGenerator():
     def __init__(self):
         self.params = get_params()
@@ -36,6 +37,7 @@ class ReportGenerator():
     def generate_report(self):
         report = []
         for table in self.table_names:
+            print 'Collecting stats for %s' % table
             curr_rate = self.get_rate(table)
             total = self.get_total_tweets(table)
             table_data = {
@@ -54,7 +56,7 @@ class ReportGenerator():
 
     def write_out(self, report):
         for table in report:
-            path = os.path.join(self.params['data_dir'], table['name'] + '.csv')
+            path = os.path.join(os.path.join(os.path.dirname(__file__), self.params['data_dir']), table['name'] + '.csv')
             if os.path.exists(path):
                 f = open(path, 'a')
             else:
@@ -74,7 +76,7 @@ class ReportGenerator():
                 total_num = str(sum([t['total']['value'] for t in report])),
                 reports = report
             )
-        with open('report_generated.html', 'w') as f:
+        with open(os.path.join(os.path.dirname(__file__),'index.html'), 'w') as f:
             f.write(outputText)
         
 def main():
